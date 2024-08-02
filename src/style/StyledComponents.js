@@ -176,7 +176,7 @@ export const GridContainer = styled.div`
 
   @media (min-width: 1000px) {
     grid-template-columns: 1fr 1fr;
-    grid-gap: 200px;
+    grid-gap: 140px;
   }
 
   @media (max-width: 999px) {
@@ -217,6 +217,28 @@ export const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 260px;
+`;
+export const TotalText = styled.p`
+  font-size: 64px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 32px;
+  margin-right: 4px;
+  span {
+    display: inline-block;
+    margin-right: 6px;
+  }
+`;
+export const TopUpBtn = styled.button`
+  width: 120px;
+  height: 50px;
+  font-weight: bold;
+  color: white;
+  background-color: #3282b8;
+  border-color: transparent;
+  border-radius: 4px;
+  font-size: 24px;
 `;
 
 export const Button = styled.button`
@@ -426,7 +448,7 @@ export const PriceDetail = styled.span`
   margin-left: 16px;
 `;
 export const DashboardContent = styled.div`
-  padding: 30px 50px;
+  margin: 30px 131px 80px 131px;
 `;
 export const SectionTitle = styled.h2`
   text-align: left;
@@ -564,6 +586,7 @@ export const MyAccountTitle = styled.h1`
 export const ProfileSection = styled.div`
   display: flex;
   width: 800px;
+  position: relative;
   align-items: center;
 `;
 export const ProfileImg = styled.img`
@@ -574,7 +597,6 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  margin-right: 360px;
 `;
 export const UserName = styled.span`
   color: #a0c6fa;
@@ -596,6 +618,8 @@ export const DetailButton = styled.button`
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;
+  position: absolute;
+  right: 0;
 `;
 export const AmountSection = styled.div`
   display: flex;
@@ -603,13 +627,15 @@ export const AmountSection = styled.div`
   font-weight: bold;
   color: white;
   align-items: center;
+  margin-top: 40px;
+  position: relative;
+  max-width: 800px;
 `;
 
 export const DynamicAmountInput = styled.input`
   background-color: transparent;
   font-size: 80px;
   font-weight: bold;
-  width: 250px;
   border: none;
   color: white;
   margin-left: 4px;
@@ -620,6 +646,8 @@ export const DynamicAmountInput = styled.input`
 export const AmountInputSection = styled.div`
   display: flex;
   flex-direction: column;
+  position: absolute;
+  right: 0;
 `;
 
 export const AmountInput = styled.input`
@@ -629,8 +657,8 @@ export const AmountInput = styled.input`
   color: #808080;
   padding: 0 6px;
   border-radius: 4px;
-  width: 310px;
-  font-size: 14px;
+  width: 260px;
+  font-size: 18px;
   margin: 4px 0;
 `;
 
@@ -646,4 +674,65 @@ export const AmountTitle = styled.span`
   font-weight: bold;
   font-size: 24px;
   text-align: left;
+`;
+export const PointSection = styled.div`
+  width: 395px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+`;
+export const PointTitle = styled.p`
+  color: #a0c6fa;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 0;
+  text-align: left;
+`;
+export const AvailablePointsSection = styled.div`
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+`;
+export const AvailablePointsTitle = styled.span`
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  display: inline-block;
+`;
+export const PointInput = styled.input`
+  background-color: transparent;
+  height: 40px;
+  border: 1px solid #808080;
+  color: #808080;
+  padding: 0 6px;
+  border-radius: 4px;
+  text-align: left;
+  margin: 4px 0;
+  width: 300px;
+  font-size: 16px;
+  box-sizing: border-box;
+`;
+export const PointInputSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const ApplyBtn = styled.button`
+  width: 75px;
+  height: 40px;
+  background-color: white;
+  color: #a0c6fa;
+  font-weight: bold;
+  font-size: 18px;
+  border-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+export const TopUpSection = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 `;

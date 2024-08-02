@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_KEY = "892fa7c9e304e100d7b0b06a11b558dfa8e6930b"; // Tiingo API Key
-
 export const fetchStockData = async (symbols, startDate, endDate) => {
   try {
     const requests = symbols.map((symbol) =>
-      axios.get(`/iex/${symbol}/prices?startDate=${startDate}&endDate=${endDate}&resampleFreq=1hour&token=${API_KEY}`)
+      axios.get(
+        `/iex/${symbol}/prices?startDate=${startDate}&endDate=${endDate}&resampleFreq=1hour&token=${process.env.REACT_APP_TIINGO_API_KEY}`
+      )
     );
 
     const responses = await Promise.all(requests);
