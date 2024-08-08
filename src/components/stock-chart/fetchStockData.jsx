@@ -2,11 +2,12 @@ import axios from "axios";
 
 export const fetchStockData = async (symbols, startDate, endDate) => {
   try {
-    const requests = symbols.map((symbol) =>
-      axios.get(
-        `/iex/${symbol}/prices?startDate=${startDate}&endDate=${endDate}&resampleFreq=1hour&token=${process.env.REACT_APP_TIINGO_API_KEY}`
-      )
-    );
+    const baseURL = process.env.REACT_APP_DB_HOST;
+    const requests = symbols.map((symbol) => {
+      const url = `${baseURL}/iex/${symbol}/prices?startDate=${startDate}&endDate=${endDate}&resampleFreq=1hour&token=${process.env.REACT_APP_TIINGO_API_KEY}`;
+      console.log(`Fetching data from URL: ${url}`);
+      return axios.get(url);
+    });
 
     const responses = await Promise.all(requests);
 
@@ -14,7 +15,7 @@ export const fetchStockData = async (symbols, startDate, endDate) => {
       const data = response.data;
       const symbol = symbols[index];
 
-      if (data && data.length > 0) {
+      if (Array.isArray(data) && data.length > 0) {
         const filteredData = data.filter((item) => item.open !== null && item.close !== null && item.date !== null);
 
         const startPrice = filteredData[0]?.close;

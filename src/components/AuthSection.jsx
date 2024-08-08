@@ -35,7 +35,7 @@ export default function AuthSection() {
     setShowModal(false);
     navigate("/");
   };
-  console.log(formType === "signInWithNoKakao");
+
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${
     process.env.REACT_APP_KAKAO_API_KEY
   }&redirect_uri=${encodeURIComponent(process.env.REACT_APP_SIGNUP_REDIRECT_URI)}&response_type=code`;

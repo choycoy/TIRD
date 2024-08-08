@@ -4,7 +4,7 @@ import { SkeletonLoader4Tiingo } from "../SkeletonLoaders";
 import { fetchStockData } from "./fetchStockData";
 import { StockChartsSectionContainer } from "../../style/StyledComponents";
 
-const stockSymbols = ["TSLA", "SOXS", "NVDA", "AAPL"]; //"TSLA", "SOXS", "NVDA", "AAPL"
+const stockSymbols = ["TSLA", "SOXS", "NVDA", "AAPL"];
 const endDate = "2024-07-26";
 const startDate = "2024-07-22";
 

@@ -2,7 +2,6 @@ import logo from "../img/logo-white.png";
 import { ModalOverlay, Modal, ModalContent, CloseButton } from "../style/StyledComponents";
 
 export default function ModalPage({ onClose, children, formType }) {
-  console.log(children);
   return (
     <ModalOverlay>
       <Modal>
