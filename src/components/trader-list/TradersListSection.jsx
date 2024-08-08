@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ListSectionContainer } from "../../style/StyledComponents";
+import { ListSectionContainer, DetailInfo } from "../../style/StyledComponents";
 import TraderList from "./TradersList";
 import PaginationSection from "./PaginationSection";
 import ButtonList from "./ButtonList";
@@ -52,6 +52,7 @@ export default function TradersListSection() {
 
   return (
     <ListSectionContainer>
+      <DetailInfo>👀 Click the trader profile to see the details</DetailInfo>
       <ButtonList setFilters={setFilters} filters={filters} />
       <TraderList currentItems={currentItems} />
       <PaginationSection currentPage={currentPage} tradersList={filteredTraders} setCurrentPage={setCurrentPage} />

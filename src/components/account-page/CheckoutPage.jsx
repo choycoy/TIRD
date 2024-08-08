@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { loadTossPayments, ANONYMOUS } from "@tosspayments/tosspayments-sdk";
+import { db } from "../../firebase";
+import { ref, update, get } from "firebase/database";
+import { useUser } from "../UserContext";
 
 const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
-const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
+const clientKey = process.env.REACT_APP_TOSS_PAYMENTS_CLIENT_KEY;
 
-export function CheckoutPage({ total }) {
+export function CheckoutPage({ amountInput, userUid, appliedPoint }) {
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState(null);
-  const formatAmount = (value) => {
-    const numericValue = value.replace(/[^0-9]/g, "");
-    return parseInt(numericValue, 10);
-  };
   const [amount, setAmount] = useState({
     currency: "KRW",
-    value: formatAmount(total),
+    value: amountInput,
   });
+  const { user, setUser } = useUser();
 
   useEffect(() => {
     async function fetchPaymentWidgets() {
@@ -31,29 +31,13 @@ export function CheckoutPage({ total }) {
       if (widgets == null) {
         return;
       }
-      /**
-       * 위젯의 결제금액을 결제하려는 금액으로 초기화하세요.
-       * renderPaymentMethods, renderAgreement, requestPayment 보다 반드시 선행되어야 합니다.
-       * @docs https://docs.tosspayments.com/sdk/v2/js#widgetssetamount
-       */
       await widgets.setAmount(amount);
 
       await Promise.all([
-        /**
-         * 결제창을 렌더링합니다.
-         * @docs https://docs.tosspayments.com/sdk/v2/js#widgetsrenderpaymentmethods
-         */
         widgets.renderPaymentMethods({
           selector: "#payment-method",
-          // 렌더링하고 싶은 결제 UI의 variantKey
-          // 결제 수단 및 스타일이 다른 멀티 UI를 직접 만들고 싶다면 계약이 필요해요.
-          // @docs https://docs.tosspayments.com/guides/v2/payment-widget/admin#새로운-결제-ui-추가하기
           variantKey: "DEFAULT",
         }),
-        /**
-         * 약관을 렌더링합니다.
-         * @docs https://docs.tosspayments.com/reference/widget-sdk#renderagreement선택자-옵션
-         */
         widgets.renderAgreement({
           selector: "#agreement",
           variantKey: "AGREEMENT",
@@ -64,7 +48,49 @@ export function CheckoutPage({ total }) {
     }
 
     renderPaymentWidgets();
-  }, [widgets]);
+  }, [widgets, amount]);
+
+  const handlePayment = async () => {
+    try {
+      const userRef = ref(db, `users/${userUid}`);
+      const userSnapshot = await get(userRef);
+      if (userSnapshot.exists()) {
+        const userData = userSnapshot.val();
+
+        const currentPoints = userData.point || 0;
+        const currentBalance = userData.balance || 0;
+        const newPoints = currentPoints - appliedPoint;
+        const newBalance = parseInt(currentBalance, 10) + amountInput;
+
+        await update(userRef, {
+          balance: newBalance,
+          point: newPoints > 0 ? newPoints : 0,
+        });
+
+        const updatedUser = {
+          uid: userUid,
+          email: user.email,
+          balance: newBalance,
+          nickname: userData.nickname,
+          point: newPoints,
+        };
+
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        await widgets?.requestPayment({
+          orderId: generateRandomString(),
+          orderName: "top-up " + amountInput,
+          customerName: user.uid,
+          customerEmail: user.email,
+          successUrl: process.env.REACT_APP_TOSS_PAYMENTS_SUCESS_REDIRECT_URI,
+          failUrl: process.env.REACT_APP_TOSS_PAYMENTS_FAIL_REDIRECT_URI,
+        });
+      }
+    } catch (error) {
+      console.error("Payment Error:", error);
+    }
+  };
 
   return (
     <div className="wrapper" style={{ width: "70%", margin: "0 auto" }}>
@@ -85,26 +111,7 @@ export function CheckoutPage({ total }) {
               fontWeight: "bold",
               cursor: "pointer",
             }}
-            onClick={async () => {
-              try {
-                /**
-                 * 결제 요청
-                 * 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
-                 * 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
-                 * @docs https://docs.tosspayments.com/sdk/v2/js#widgetsrequestpayment
-                 */
-                await widgets?.requestPayment({
-                  orderId: generateRandomString(),
-                  orderName: "top-up" + total,
-                  customerName: "TIRD Customer",
-                  customerEmail: "customer123@gmail.com",
-                  successUrl: window.location.origin + "/sandbox/success" + window.location.search,
-                  failUrl: window.location.origin + "/sandbox/fail" + window.location.search,
-                });
-              } catch (error) {
-                // TODO: 에러 처리
-              }
-            }}
+            onClick={handlePayment}
           >
             결제하기
           </button>

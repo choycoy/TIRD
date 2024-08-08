@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ChartContainer, StockDetail } from "../style/StyledComponents";
 
-const SkeletonLoader = ({ count = 4 }) => {
+export const SkeletonLoader4Tiingo = ({ count = 4 }) => {
   const skeletonArray = Array.from({ length: count }, (_, index) => (
     <ChartContainer key={index}>
       <StockDetail>
@@ -15,5 +15,3 @@ const SkeletonLoader = ({ count = 4 }) => {
 
   return <>{skeletonArray}</>;
 };
-
-export default SkeletonLoader;

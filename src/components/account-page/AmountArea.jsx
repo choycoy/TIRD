@@ -8,14 +8,16 @@ import {
 } from "../../style/StyledComponents";
 import { useState, useEffect } from "react";
 
-export default function AmountArea({ amountInput, setAmountInput }) {
+export default function AmountArea({ amountInput, setAmountInput, minAmount }) {
   const [textColor, setTextColor] = useState("#d3d3d3");
   const formatNumber = (number) => {
     return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   const handleAmountOnChange = (e) => {
     const value = e.target.value.replace(/,/g, "");
-    if (/^\d*$/.test(value)) {
+    if (!value) {
+      setAmountInput("");
+    } else if (/^\d*$/.test(value)) {
       setAmountInput(formatNumber(value));
     }
   };
@@ -28,6 +30,7 @@ export default function AmountArea({ amountInput, setAmountInput }) {
       setTextColor("#d3d3d3");
     }
   }, [amountInput]);
+
   return (
     <AmountSection>
       <span>₩</span>
@@ -40,7 +43,7 @@ export default function AmountArea({ amountInput, setAmountInput }) {
           onChange={handleAmountOnChange}
           placeholder="Enter top-up amount"
         />
-        <MinAmountText $color={textColor}>Minimum top-up amount is ₩10,000</MinAmountText>
+        <MinAmountText $color={textColor}>Minimum top-up amount is ₩ {formatNumber(minAmount)}</MinAmountText>
       </AmountInputSection>
     </AmountSection>
   );

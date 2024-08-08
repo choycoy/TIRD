@@ -1,7 +1,6 @@
 import React from "react";
 import AuthSection from "./AuthSection";
 import logo from "../img/logo-white.png";
-import Footer from "./Footer";
 import { Container, GridContainer, GridItem, Logo, HomeHeading1, Heading4 } from "../style/StyledComponents";
 
 export default function CenteredComponent() {
@@ -15,7 +14,6 @@ export default function CenteredComponent() {
           <AuthSection />
         </GridItem>
       </GridContainer>
-      <Footer />
     </Container>
   );
 }

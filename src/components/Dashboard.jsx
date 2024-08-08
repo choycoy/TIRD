@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import StockChartsSection from "./stock-chart/StockChartsSection";
 import { DashboardContainer, DashboardContent, SectionTitle } from "../style/StyledComponents";
 import TradersListSection from "./trader-list/TradersListSection";
+
 export default function Dashboard() {
   return (
     <DashboardContainer>

@@ -13,7 +13,6 @@ const useCheckField = (fieldValue, fieldRefPath, minLength, fieldName, setStatus
             const fieldList = fieldSnapshot.val();
             const fieldValues = Object.values(fieldList);
             const fieldExists = fieldValues.includes(fieldValue);
-
             if (fieldExists) {
               setStatus((prevStatus) => ({
                 ...prevStatus,

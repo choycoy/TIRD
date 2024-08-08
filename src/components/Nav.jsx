@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { NavList, StyledLink, NavContainer, NavLogo } from "../style/StyledComponents";
 import { Link } from "react-router-dom";
 import logo from "../img/logo-white.png";
+import LogOutBtn from "./LogOutBtn";
 export default function Nav() {
   const location = useLocation();
   return (
@@ -26,7 +27,11 @@ export default function Nav() {
           </StyledLink>
         </li>
         <li>
-          <StyledLink to="/" className={location.pathname === "/" ? "active" : ""}>
+          <StyledLink
+            to="/"
+            className={location.pathname === "/" ? "active" : ""}
+            style={{ cursor: "not-allowed", pointerEvents: "none" }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -41,7 +46,11 @@ export default function Nav() {
           </StyledLink>
         </li>
         <li>
-          <StyledLink to="/" className={location.pathname === "/" ? "active" : ""}>
+          <StyledLink
+            to="/"
+            className={location.pathname === "/" ? "active" : ""}
+            style={{ cursor: "not-allowed", pointerEvents: "none" }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -75,6 +84,7 @@ export default function Nav() {
           </StyledLink>
         </li>
       </NavList>
+      <LogOutBtn />
     </NavContainer>
   );
 }

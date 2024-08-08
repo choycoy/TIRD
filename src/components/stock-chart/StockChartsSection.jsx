@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import StockChart from "./StockChart";
-import SkeletonLoader from "../SkeletonLoader";
+import { SkeletonLoader4Tiingo } from "../SkeletonLoaders";
 import { fetchStockData } from "./fetchStockData";
 import { StockChartsSectionContainer } from "../../style/StyledComponents";
 
-const stockSymbols = ["TSLA", "SOXS", "NVDA", "AAPL"]; //,"SOXS", "NVDA", "AAPL"
+const stockSymbols = ["TSLA", "SOXS", "NVDA", "AAPL"]; //"TSLA", "SOXS", "NVDA", "AAPL"
 const endDate = "2024-07-26";
 const startDate = "2024-07-22";
 
@@ -30,7 +30,7 @@ const StockChartsSection = () => {
   return (
     <StockChartsSectionContainer>
       {loading ? (
-        <SkeletonLoader />
+        <SkeletonLoader4Tiingo />
       ) : (
         stocksData.map((stock) => (
           <StockChart

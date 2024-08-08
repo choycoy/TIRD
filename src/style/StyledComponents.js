@@ -37,26 +37,6 @@ export const PhoneNoSection = styled.div`
   align-items: center;
 `;
 
-export const SendButton = styled.button`
-  font-size: 14px;
-  box-sizing: border-box;
-  background-color: ${({ $send }) => ($send === "sent" ? "white" : "transparent")};
-  color: ${({ $send }) => ($send === "sent" ? "black" : "white")};
-  border: 0.5px solid #e7e9ea;
-  width: 55px;
-  font-weight: bold;
-  height: 35px;
-  border-radius: 4px;
-  margin-left: 10px;
-  margin-top: 6px;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: black;
-    background-color: white;
-  }
-`;
 export const InputWithStatus = styled.div`
   display: flex;
   align-items: center;
@@ -109,8 +89,8 @@ export const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
-  width: 650px;
-  height: 650px;
+  width: 550px;
+  padding-bottom: 60px;
   background-color: black;
   border-radius: 16px;
   color: white;
@@ -126,6 +106,7 @@ export const ModalContent = styled.div`
 export const Heading1 = styled.h1`
   margin-top: 0;
   text-align: ${({ $formType }) => ($formType === "signUp" ? "" : "left")};
+  margin-bottom: ${({ $formType }) => ($formType === "signInWithNoKakao" ? "0" : "")};
 `;
 
 export const CloseButton = styled.span`
@@ -163,35 +144,32 @@ export const SignUpButton = styled.button`
   }
 `;
 export const Container = styled.div`
-  width: 70%;
-  margin: 0 auto;
+  padding: 60px;
   height: 100vh;
 `;
 export const GridContainer = styled.div`
   color: white;
-  height: 100vh;
   display: grid;
-  align-items: center;
   justify-items: center;
+  width: 80%;
+  margin: 150px auto 0 auto;
 
   @media (min-width: 1000px) {
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 140px;
+    grid-template-columns: 450px 1fr;
   }
 
   @media (max-width: 999px) {
     grid-template-columns: 1fr;
     grid-template-rows: 150px 450px;
-    width: 611px;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
     grid-gap: 36px;
+    justify-items: start;
   }
 `;
 export const GridItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 611px;
 `;
 export const Logo = styled.img`
   width: 450px;
@@ -208,6 +186,8 @@ export const Logo = styled.img`
 `;
 export const HomeHeading1 = styled.h1`
   font-size: 50px;
+  text-align: left;
+  white-space: nowrap;
 `;
 export const Heading4 = styled.h4`
   font-size: 24px;
@@ -239,6 +219,38 @@ export const TopUpBtn = styled.button`
   border-color: transparent;
   border-radius: 4px;
   font-size: 24px;
+`;
+export const DetailInfo = styled.p`
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 0;
+`;
+export const DetailSection = styled.div`
+  padding: 44px 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const IntroductionText = styled.p`
+  background-color: rgba(223, 223, 223, 0.39);
+  font-size: 18px;
+  padding: 16px;
+  color: black;
+  text-align: left;
+  height: 228px;
+  border-radius: 8px;
+  margin: 8px 16px 16px 16px;
+`;
+export const FollownBtn = styled.button`
+  width: 110px;
+  height: 48px;
+  background-color: #bbe1fa;
+  font-weight: bold;
+  font-size: 18px;
+  border-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
@@ -405,6 +417,9 @@ export const StyledLink = styled(Link)`
 export const NavContainer = styled.div`
   min-width: 275px;
   border-right: 0.5px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const NavLogo = styled.img`
@@ -506,7 +521,7 @@ export const TraderProfile = styled.div.withConfig({
   height: 60px;
   display: flex;
   align-items: center;
-  border: 1px solid #0f4c75;
+  border: ${({ $border }) => ($border ? "#1px solid #0f4c75" : "none")};
   background-color: ${(props) => (props.isOdd ? "#BBE1FA" : "white")};
 `;
 export const TraderImg = styled.img`
@@ -602,11 +617,13 @@ export const UserName = styled.span`
   color: #a0c6fa;
   font-weight: bold;
   font-size: 24px;
+  text-align: left;
 `;
 export const BalanceText = styled.p`
   font-size: 18px;
   color: white;
   margin: 0;
+  text-align: left;
 `;
 export const DetailButton = styled.button`
   color: #a0c6fa;
@@ -735,4 +752,128 @@ export const TopUpSection = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+`;
+export const ChargeSection = styled.div`
+  padding: 18px 24px;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+`;
+export const ChargeBtn = styled.button`
+  height: 26px;
+  border-radius: 4px;
+  background-color: #0096ff;
+  color: white;
+  border-color: transparent;
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 6px;
+  font-family: Roboto;
+  cursor: pointer;
+`;
+export const ChargeInput = styled.input`
+  height: 30px;
+  background-color: rgba(223, 223, 223, 0.39);
+  border-color: transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 4px;
+  margin-right: 8px;
+  outline: none;
+  font-weight: bold;
+`;
+export const RequirementText = styled.p`
+  color: red;
+  text-align: left;
+  font-size: 12px;
+  margin: 0;
+`;
+export const AlertModalContainer = styled(Modal)`
+  width: 220px;
+  height: 110px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SendBtn = styled.button`
+  color: black;
+  background-color: #faffaf;
+  font-weight: bold;
+  font-family: Roboto;
+  border-color: transparent;
+  border-radius: 4px;
+  height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+  cursor: pointer;
+`;
+export const BackBtn = styled.button`
+  background-color: rgba(128, 128, 128, 0.62);
+  color: white;
+  font-size: 12px;
+  height: 24px;
+  position: absolute;
+  right: 24px;
+  bottom: 18px;
+  border-radius: 4px;
+  font-family: Roboto;
+  padding: 0 8px;
+  cursor: pointer;
+  border: transparent;
+`;
+export const BalanceText2 = styled.p`
+  color: #d3d3d3;
+  text-align: left;
+  margin: 8px 0;
+  font-size: 14px;
+`;
+export const PINModalContainer = styled(Modal)`
+  width: 300px;
+  height: 270px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PINInput = styled.input`
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+  border-radius: 4px;
+  border-color: transparent;
+  overflow: hidden;
+  font-size: 24px;
+  text-align: center;
+  outline: none;
+  font-family: Roboto;
+`;
+
+export const NumberButton = styled.button`
+  width: 35px;
+  height: 25px;
+  margin: 2px;
+  font-family: Roboto;
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  color: white;
+  &:hover {
+    background-color: #e0e0e0;
+    color: black;
+  }
+`;
+
+export const ButtonGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 16px;
+  width: 200px;
 `;

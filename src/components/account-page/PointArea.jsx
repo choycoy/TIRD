@@ -9,28 +9,35 @@ import {
 } from "../../style/StyledComponents";
 import { useState } from "react";
 
-export default function PointArea({ pointInput, setPointInput, totalPoint }) {
+export default function PointArea({ pointInput, setPointInput, totalPoint, onApplyClick }) {
   const [btnText, setBtnText] = useState("all");
 
   const handlePointOnChange = (e) => {
     const value = e.target.value.replace(/,/g, "");
-    if (/^\d*$/.test(value)) {
-      setPointInput(value);
-      setBtnText("apply");
+    if (!value) {
+      setPointInput("");
+      setBtnText("all");
+    } else if (/^\d*$/.test(value)) {
+      if (parseInt(value, 10) > totalPoint) {
+        setPointInput(totalPoint.toString());
+      } else {
+        setPointInput(value);
+      }
+      setBtnText("applied");
     }
   };
+
   const handleApplyButtonClick = () => {
     const numericPointInput = parseInt(pointInput.replace(/,/g, ""), 10);
     if (btnText === "all") {
       setPointInput(totalPoint.toString());
-      setBtnText("applied");
     } else if (numericPointInput > totalPoint) {
       setPointInput(totalPoint.toString());
-      setBtnText("applied");
     } else {
       setPointInput(numericPointInput.toString());
-      setBtnText("applied");
     }
+    setBtnText("applied");
+    onApplyClick(numericPointInput);
   };
 
   return (

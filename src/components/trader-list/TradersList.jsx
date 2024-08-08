@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import {
-  TraderListContainer,
-  TraderProfile,
-  TraderImg,
-  TraderInfo,
-  BadgeContainer,
-  Badge,
-} from "../../style/StyledComponents";
+import { TraderListContainer } from "../../style/StyledComponents";
+import TraderDetailModal from "./TraderDetailModal";
+import TraderProfileComponent from "./TraderProfileComponent";
+
 export default function TraderList({ currentItems }) {
-  const fallbackImage = "fallbackimg.png";
   const [images, setImages] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [selectedTrader, setSelectedTrader] = useState(null);
+  const [infoText, setInfoText] = useState("");
+  const fallbackImage = "fallbackimg.png";
 
   useEffect(() => {
     currentItems.forEach((trader) => {
@@ -31,22 +30,35 @@ export default function TraderList({ currentItems }) {
       img.onerror = () => reject();
     });
   };
+
+  const handleTraderClick = (trader) => {
+    setSelectedTrader(trader);
+    setShowModal(true);
+    setInfoText(trader.infoText);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedTrader(null);
+  };
+
   return (
-    <TraderListContainer>
-      {currentItems.map((trader, index) => (
-        <TraderProfile key={trader.nickname} isOdd={index % 2 !== 0}>
-          <TraderImg src={images[trader.nickname] || fallbackImage} alt={trader.nickname} />
-          <TraderInfo>
-            <span style={{ fontWeight: "bold", fontSize: "14px" }}>{trader.nickname}</span>
-            <p style={{ margin: 0, fontSize: "18px", color: "#696969" }}>{trader.saying}</p>
-          </TraderInfo>
-          <BadgeContainer>
-            <Badge>{trader.option}</Badge>
-            <Badge>⭐{trader.rating}</Badge>
-            <Badge>{trader.followers}k</Badge>
-          </BadgeContainer>
-        </TraderProfile>
-      ))}
-    </TraderListContainer>
+    <>
+      <TraderListContainer>
+        {currentItems.map((trader, index) => (
+          <TraderProfileComponent
+            isOdd={index % 2 !== 0}
+            onClick={handleTraderClick}
+            trader={trader}
+            key={trader.nickname}
+            images={images}
+            $border={true}
+          />
+        ))}
+      </TraderListContainer>
+      {showModal && (
+        <TraderDetailModal trader={selectedTrader} onClose={handleCloseModal} images={images} infoText={infoText} />
+      )}
+    </>
   );
 }
