@@ -14,7 +14,7 @@ export default function TraderDetailModal({ onClose, trader, images, infoText })
   const [showModal, setShowModal] = useState(false);
   return (
     <ModalOverlay>
-      <Modal style={{ backgroundColor: "white", width: "730px", height: "458px" }}>
+      <Modal style={{ backgroundColor: "white", width: "730px", height: "458px", paddingBottom: "0" }}>
         <CloseButton onClick={onClose}>&times;</CloseButton>
         <DetailSection>
           <TraderProfileComponent trader={trader} images={images} $border={false} />
