@@ -83,9 +83,9 @@ export default function FollowModal({ onClose }) {
   return (
     <>
       <ModalOverlay>
-        <Modal style={{ width: "360px", height: "190px" }}>
+        <Modal style={{ width: "360px", paddingBottom: "30px" }}>
           <ChargeSection>
-            <p style={{ fontSize: "26px", margin: "0", fontWeight: "bold", textAlign: "left" }}>
+            <p style={{ fontSize: "28px", margin: "0", fontWeight: "bold", textAlign: "left" }}>
               To follow this trader
             </p>
             <BalanceText2>
@@ -95,7 +95,7 @@ export default function FollowModal({ onClose }) {
               </Link>
             </BalanceText2>
             <RequirementText> Requirement: ₩ {formatNumber(requirement)}</RequirementText>
-            <div style={{ display: "flex", alignItems: "center", marginTop: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
               <ShakingInput
                 ref={inputRef}
                 shake={shake}

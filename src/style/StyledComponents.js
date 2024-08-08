@@ -754,11 +754,11 @@ export const TopUpSection = styled.div`
   box-sizing: border-box;
 `;
 export const ChargeSection = styled.div`
-  padding: 18px 24px;
+  padding: 30px;
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  padding-bottom: 0;
 `;
 export const ChargeBtn = styled.button`
   height: 26px;
@@ -773,7 +773,7 @@ export const ChargeBtn = styled.button`
   cursor: pointer;
 `;
 export const ChargeInput = styled.input`
-  height: 30px;
+  height: 34px;
   background-color: rgba(223, 223, 223, 0.39);
   border-color: transparent;
   border-radius: 4px;
@@ -786,7 +786,7 @@ export const ChargeInput = styled.input`
 export const RequirementText = styled.p`
   color: red;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 `;
 export const AlertModalContainer = styled(Modal)`
@@ -797,6 +797,7 @@ export const AlertModalContainer = styled(Modal)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 16px;
 `;
 
 export const SendBtn = styled.button`
@@ -829,7 +830,7 @@ export const BalanceText2 = styled.p`
   color: #d3d3d3;
   text-align: left;
   margin: 8px 0;
-  font-size: 14px;
+  font-size: 16px;
 `;
 export const PINModalContainer = styled(Modal)`
   width: 300px;
@@ -839,6 +840,7 @@ export const PINModalContainer = styled(Modal)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 16px;
 `;
 
 export const PINInput = styled.input`
